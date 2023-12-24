@@ -1,6 +1,10 @@
 import GoogleProvider from "next-auth/providers/google"
 import  CredentialsProvider from "next-auth/providers/credentials"
-import {NextAuthOptions} from "next-auth"
+import {AuthOptions, NextAuthOptions} from "next-auth"
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient();
 
 const getCredentialsGoogle = () => {
     const clientId = process.env.GOOGLE_CLIENT_ID
@@ -12,12 +16,23 @@ const getCredentialsGoogle = () => {
     return {clientId,clientSecret}
 }
 
-const options: NextAuthOptions = {
+const options: NextAuthOptions= {
+    adapter: PrismaAdapter(prisma),
     providers:[
         GoogleProvider({
             clientId: getCredentialsGoogle().clientId,
             clientSecret: getCredentialsGoogle().clientSecret
-        })  
+        }),
+        CredentialsProvider({
+        name : "credentials",
+        credentials: {
+            username: {label: "Username",type: "text",placeholder: "jsmith"},
+            password : {label: "Username",type: "password"}
+        },
+        async authorize(credentials, req) {
+            return null;
+        },
+        })
     ],
     session:{
         strategy: "jwt"
