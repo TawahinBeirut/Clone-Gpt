@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 
 const prisma = new PrismaClient()
 
+
 export async function POST(request: Request){
     const body = await request.json()
     const {name,email,password} = body;
@@ -22,13 +23,14 @@ export async function POST(request: Request){
         return new NextResponse("Email already exist",{status: 400})
     }
 
-    const tmp = await bcrypt.hash(password,10)
-
+    const hashedPassword = await bcrypt.hash(password,10)
     const user = await prisma.user.create({
-        data:{
+        data: {
             name,
             email,
-            tmp         
+            hashedPassword
         }
-    })
+    });
+
+    return NextResponse.json(user)
 }

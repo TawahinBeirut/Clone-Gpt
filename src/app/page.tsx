@@ -1,13 +1,9 @@
 "use client"
-
-import Img from "@/../public/urangUtan.png"
-import Img2 from "@/../public/Logo-Jasser-GPT.png"
-import { useState } from "react"
-import { LoginComp } from "@/components/LoginComp"
+import { useSession } from "next-auth/react"
 
 export default function Home() {
+  const {data: session,status} = useSession();
 
-  
   return(
     <h1>OE</h1>
   )

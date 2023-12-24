@@ -3,6 +3,7 @@ import  CredentialsProvider from "next-auth/providers/credentials"
 import {AuthOptions, NextAuthOptions} from "next-auth"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
+import bcrypt from "bcrypt"
 
 const prisma = new PrismaClient();
 
@@ -27,10 +28,32 @@ const options: NextAuthOptions= {
         name : "credentials",
         credentials: {
             username: {label: "Username",type: "text",placeholder: "jsmith"},
-            password : {label: "Username",type: "password"}
+            password : {label: "Username",type: "password"},
+            email : {label: "Email",type:"email"}
         },
         async authorize(credentials, req) {
-            return null;
+            // On verifie ici si le mdp/ email est valide
+            if (!credentials?.email || credentials.username){
+                return null;
+            }
+
+            const user = await prisma.user.findUnique({
+                where:{
+                    email: credentials.email
+                }
+            })
+
+            if (!user){
+                return null;
+            }
+
+            const passwordMatch = (user.hashedPassword) ? await bcrypt.compare(credentials.password,user.hashedPassword) : null;
+
+            if (!passwordMatch){
+                return null
+            }
+
+            return user;
         },
         })
     ],
