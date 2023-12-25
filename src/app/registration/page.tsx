@@ -15,7 +15,7 @@ export default function Home() {
       />
       <div className="w-5/6 mt-36">
         <div className="flex justify-center">
-        <div className="border-8 border-gray-700 w-4/6 text-center rounded-xl p-4">
+        <div className="border-2 border-gray-700 drop-shadow-2xl w-4/6 text-center rounded-xl p-4">
         <div className="flex justify-center"><img 
         src={Img2.src}
         width="150"

@@ -5,6 +5,6 @@ export default function Home() {
   const {data: session,status} = useSession();
 
   return(
-    <h1>OE</h1>
+    <h1>{JSON.stringify(session)}</h1>
   )
 }

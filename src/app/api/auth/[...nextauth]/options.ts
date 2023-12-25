@@ -31,7 +31,7 @@ const options: NextAuthOptions= {
             password : {label: "Username",type: "password"},
             email : {label: "Email",type:"email"}
         },
-        async authorize(credentials, req) {
+        async authorize(credentials) {
             // On verifie ici si le mdp/ email est valide
             if (!credentials?.email || credentials.username){
                 return null;
