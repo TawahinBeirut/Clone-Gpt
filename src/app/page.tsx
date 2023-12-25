@@ -2,9 +2,11 @@
 import { useSession } from "next-auth/react"
 
 export default function Home() {
-  const {data: session,status} = useSession();
+  const {data: session,status} = useSession();  
 
-  return(
-    <h1>{JSON.stringify(session)}</h1>
-  )
+  if (status === "authenticated") {
+    return <p>Signed in as {session.user?.email}</p>
+  }
+
+  return <a href="/registration">Sign in</a>
 }
