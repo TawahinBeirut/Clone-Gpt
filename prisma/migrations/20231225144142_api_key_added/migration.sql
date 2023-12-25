@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "ApiKey" TEXT NOT NULL DEFAULT '';
