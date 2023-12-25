@@ -6,7 +6,7 @@ const LoginGoogle = () => {
     const router = useRouter();
 
     const Login = () => {
-        signIn("google")
+        signIn("google",{callbackUrl: "/"});
     }
 
     return(
