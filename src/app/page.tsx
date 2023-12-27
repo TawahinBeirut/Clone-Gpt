@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react"
 import { UserBar } from "@/components/UserBar";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import MainWindow from "@/components/MainWindow";
 
 export default function Home() {
   const {data: session,status} = useSession(); 
@@ -12,6 +13,7 @@ export default function Home() {
     return (
       <div className="flex">  
         <UserBar UserName={session.user.name} UserMail={session.user.email}/>
+        <MainWindow UserMail={session.user.email}/>
       </div>
     )
 

@@ -10,8 +10,6 @@ type UserBarProps = {
 
 const UserBar = ({UserName,UserMail}: UserBarProps) =>{
 
-    const Router = useRouter();
-
     return(
         <div className="border border-black h-screen p-5 bg-white flex flex-col gap-16">
             <div className="text-center overflow-hidden max-w-44">
