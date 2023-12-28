@@ -1,4 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+::-webkit-scrollbar {
+  @apply w-2 bg-gray-400;
+}
 
+/* Styles pour le pouce de la barre de défilement */
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 hover:bg-gray-800;
+}
+
+/* Styles pour la piste de la barre de défilement */
+::-webkit-scrollbar-track {
+  @apply bg-gray-400;
+}
+
+/* Classe pour un élément avec défilement vertical */
+.overflow-y-scroll-custom {
+  overflow-y: scroll;
+}
