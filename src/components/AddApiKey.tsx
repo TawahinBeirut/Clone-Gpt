@@ -10,29 +10,15 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { Button } from "./ui/button";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
 import toast from "react-hot-toast";
+import { PageContext } from "@/app/page";
 
-type ExistingProps = {
-  UserMail: string;
-};
-const AddApiKeyComp = ({ UserMail }: ExistingProps) => {
-  const [newApiKey, setNewApiKey] = useState<string>("");
-
-  useEffect(() => {
-    fetch("/api/GetApiKey", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: UserMail }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => setNewApiKey(res.apiKey));
-  }, []);
+const AddApiKeyComp = () => {
+  const {Email,change,ApiKey} = useContext(PageContext);
+  const [newApiKey, setNewApiKey] = useState<string>(ApiKey || "");
+  const [changed,setChanged] = useState<boolean>(false);
 
   const onSave = async () => {
     let result = await fetch("api/EditApiKey", {
@@ -40,10 +26,12 @@ const AddApiKeyComp = ({ UserMail }: ExistingProps) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: UserMail, newApiKey: newApiKey }),
+      body: JSON.stringify({ email: Email, newApiKey: newApiKey }),
     });
     if (result.status === 200) {
       toast.success("Api Key Bien modifiée");
+      change(!changed);
+      setChanged(!changed);
     } else {
       toast.error("IHOUDI");
     }

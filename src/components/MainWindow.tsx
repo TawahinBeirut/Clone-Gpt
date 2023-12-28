@@ -1,27 +1,16 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, useContext } from "react";
+import { PageContext } from "@/app/page";
+export default function MainWindow() {
 
-type WindowProps = {
-    UserMail : string
-}
-
-export default function MainWindow({UserMail}: WindowProps) {
-
-    const [newApiKey, setNewApiKey] = useState<string>("");
-
-  useEffect(() => {
-    fetch("/api/GetApiKey", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: UserMail }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => setNewApiKey(res.apiKey));
-  }, []);
+  const [newApiKey, setNewApiKey] = useState<string>("");
+  const {ApiKey} = useContext(PageContext);
+  
     return (
-        <h1>{newApiKey}</h1>
+      <>
+        <h1>{ApiKey}</h1>
+        {/* Chat Window // Tester quand ya mille messages */}
+        {/* Fenetre de Chat */}
+        {/* Créer un historique de chats */}
+      </>
     )
 }
