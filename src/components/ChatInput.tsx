@@ -5,7 +5,7 @@ export default function ChatInput({addChat}: any){
   const [prompt,setPrompt] = useState<string>("");
 
   const clear = () => {
-    if (prompt !== ""){
+    if (prompt.trim().length !== 0){
     addChat(prompt);
     setPrompt("");
     }
