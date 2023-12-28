@@ -11,3 +11,8 @@ export type PageContextType = {
   ApiKey: string | null,
   change : (arg0: boolean) => void
 }
+
+export type ChatProps = {
+  User : string,
+  Text : string
+}
