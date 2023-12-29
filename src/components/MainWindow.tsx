@@ -5,6 +5,7 @@ import ChatInput from "./ChatInput";
 import { ChatProps } from "@/lib/utils";
 import { AskRequest } from "@/lib/openAiRequests";
 import toast from "react-hot-toast";
+import { RequestType } from "@/lib/utils";
 
 export default function MainWindow() {
 
@@ -15,30 +16,31 @@ export default function MainWindow() {
   const [ChatsList,setChatsList]  = useState<ChatProps[]>([]);
   const [loading,setLoading] = useState<boolean>(false);
 
-  const addResponse = async(Text:string,tmpchat:ChatProps) => {
+  const addResponse = async(Text:string,tmpchat:ChatProps,mode:string) => {
     setLoading(true);
     let tpmResponse:ChatProps|null = null;
-    const result = await AskRequest({apiKey:ApiKey || "",prompt:Text})
+    const result = await AskRequest({apiKey:ApiKey || "",prompt:Text,type:mode})
     
     if (result instanceof Error){
-      toast.error(result.message);
+      toast.error("tg");
+      tpmResponse = {User: "Jasser",Text: result.message,mode: RequestType.CHAT}
     }
     else{
       if (result === null){
         toast.error("Reponse nulle");
       }
       else{
-      tpmResponse = {User:"Jasser",Text:result};
+      tpmResponse = {User:"Jasser",Text:result || "Requete echouée, raison inconnue",mode};
       }
     }
     if (tpmResponse)setChatsList([...ChatsList,tmpchat,tpmResponse])
     setLoading(false);
   }
 
-  const addChat = async(Text: string) => {
-    let tmpchat: ChatProps = {User:Name || "",Text:Text};
+  const addChat = async(Text: string,mode: string) => {
+    let tmpchat: ChatProps = {User:Name || "",Text:Text,mode:RequestType.CHAT};
     setChatsList([...ChatsList,tmpchat]);
-    addResponse(Text,tmpchat);
+    addResponse(Text,tmpchat,mode);
   }
   
     return (

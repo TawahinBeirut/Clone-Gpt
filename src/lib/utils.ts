@@ -9,10 +9,15 @@ export type PageContextType = {
   Name: string | null
   Email: string | null,
   ApiKey: string | null,
-  change : (arg0: boolean) => void
+  change : (arg0: boolean) => void,
 }
 
 export type ChatProps = {
   User : string,
-  Text : string
+  Text : string,
+  mode: string
+}
+export const RequestType = {
+  CHAT: "0",
+  IMAGE: "1"
 }
