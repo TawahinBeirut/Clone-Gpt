@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 type AskProps = {
     apiKey: string,
-    prompt: string
+    prompt: string,
 }
 
 const AskRequest = async({apiKey,prompt}: AskProps)=> {

@@ -15,12 +15,11 @@ export default function MainWindow() {
   const [ChatsList,setChatsList]  = useState<ChatProps[]>([]);
   const [loading,setLoading] = useState<boolean>(false);
 
-  const addChat = async(Text: string) => {
+  const addResponse = async(Text:string,tmpchat:ChatProps) => {
     setLoading(true);
-    let tmpchat: ChatProps = {User:Name || "",Text:Text};
     let tpmResponse:ChatProps|null = null;
     const result = await AskRequest({apiKey:ApiKey || "",prompt:Text})
-
+    
     if (result instanceof Error){
       toast.error(result.message);
     }
@@ -33,23 +32,25 @@ export default function MainWindow() {
       }
     }
     if (tpmResponse)setChatsList([...ChatsList,tmpchat,tpmResponse])
-    else setChatsList([...ChatsList,tmpchat]);
     setLoading(false);
+  }
+
+  const addChat = async(Text: string) => {
+    let tmpchat: ChatProps = {User:Name || "",Text:Text};
+    setChatsList([...ChatsList,tmpchat]);
+    addResponse(Text,tmpchat);
   }
   
     return (
       <>
-      {!loading ?
       <div className="h-screen overflow-hidden">
         <div className=" h-full flex flex-col justify-end pb-4 gap-5">
-          
-        <ChatWindow ChatsList={ChatsList}/>
+        <ChatWindow ChatsList={ChatsList} loading={loading}/>
         <ChatInput addChat={addChat}/>
         {/* Fenetre de Chat */}
         {/* Créer un historique de chats */}
         </div>
       </div>
-      : "..."}
       </>
     )
 }

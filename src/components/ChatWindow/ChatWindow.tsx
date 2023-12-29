@@ -4,9 +4,10 @@ import Chat from "./Chat";
 
 type ChatWindowProps = {
     ChatsList: ChatProps[],
+    loading: boolean
 }
 
-export default function ChatWindow({ChatsList}: ChatWindowProps){
+export default function ChatWindow({ChatsList,loading}: ChatWindowProps){
     const endOfMessagesRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function ChatWindow({ChatsList}: ChatWindowProps){
             {ChatsList.map(el => (
                 <Chat {...el} />
             ))}
+        {loading? "..." : null}
         <div ref={endOfMessagesRef} />
         </div>
         </div>
