@@ -15,7 +15,6 @@ const AskRequest = async({apiKey,prompt,type}: AskProps)=> {
     }
     const openai = new OpenAI({apiKey: apiKey,dangerouslyAllowBrowser: true});
     let result;
-    console.log(prompt)
     try{
         switch(type){
             case RequestType.CHAT:

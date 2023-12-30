@@ -48,8 +48,8 @@ const AddApiKeyComp = () => {
         <DialogHeader>
           <DialogTitle>Ajoutez ou modifiez votre Api Key</DialogTitle>
           <DialogDescription>
-            L'API key est celle que tu va utiliser pour payer tes requetes à
-            chat GPT pd: voici un lien : pluis tard
+            L&apos;API key est celle que tu va utiliser pour payer tes requetes à
+            chat GPT pd: voici un lien : plus tard
           </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-4 items-center gap-4">

@@ -72,4 +72,4 @@ const options: NextAuthOptions= {
     }
 }
 
-export default options;
+export {options};
