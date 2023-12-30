@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { createContext } from "react"
  
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -21,3 +22,6 @@ export const RequestType = {
   CHAT: "0",
   IMAGE: "1"
 }
+
+
+export const PageContext = createContext<PageContextType>({Name:"",Email:"",ApiKey:"",change() {}});

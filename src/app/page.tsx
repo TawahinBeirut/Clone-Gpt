@@ -4,11 +4,7 @@ import { UserBar } from "@/components/UserBar";
 import { useEffect, useState,createContext,useReducer, useContext} from "react";
 import toast from "react-hot-toast";
 import MainWindow from "@/components/MainWindow";
-import { PageContextType , RequestType} from "@/lib/utils";
-
-
-
-export const PageContext = createContext<PageContextType>({Name:"",Email:"",ApiKey:"",change() {}});
+import { PageContextType , RequestType,PageContext} from "@/lib/utils";
 
 export default function Home() {
   const {data: session,status} = useSession(); 
