@@ -1,8 +1,7 @@
 import { useState,useEffect, useContext } from "react";
-import { PageContext } from "@/app/page";
 import ChatWindow from "./ChatWindow/ChatWindow";
 import ChatInput from "./ChatInput";
-import { ChatProps } from "@/lib/utils";
+import { ChatProps ,PageContext} from "@/lib/utils";
 import { AskRequest } from "@/lib/openAiRequests";
 import toast from "react-hot-toast";
 import { RequestType } from "@/lib/utils";

@@ -13,7 +13,7 @@ import { Button } from "./ui/button";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
 import toast from "react-hot-toast";
-import { PageContext } from "@/app/page";
+import { PageContext } from "@/lib/utils";
 
 const AddApiKeyComp = () => {
   const {Email,change,ApiKey} = useContext(PageContext);
