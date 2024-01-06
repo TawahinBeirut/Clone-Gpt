@@ -61,6 +61,6 @@ export default function Home() {
   }
 
 
-  return <a href="/registration">Sign in</a>
+  return <a href="/registration" className="text-blue-700 selection:bg-pink-300">Sign in</a>
 
 }
