@@ -23,6 +23,38 @@ const options: NextAuthOptions= {
         GoogleProvider({
             clientId: getCredentialsGoogle().clientId,
             clientSecret: getCredentialsGoogle().clientSecret
+        }),
+        CredentialsProvider({
+        name : "credentials",
+        credentials: {
+            username: {label: "Username",type: "text",placeholder: "jsmith"},
+            password : {label: "Password",type: "password"},
+            email : {label: "Email",type:"email"}
+        },
+        async authorize(credentials) {
+            // On verifie ici si le mdp/ email est valide
+            if (!credentials?.email || credentials.username){
+                return null;
+            }
+
+            const user = await prisma.user.findUnique({
+                where:{
+                    email: credentials.email
+                }
+            })
+
+            if (!user){
+                return null;
+            }
+
+            const passwordMatch = (user.hashedPassword) ? await bcrypt.compare(credentials.password,user.hashedPassword) : null;
+
+            if (!passwordMatch){
+                return null
+            }
+
+            return user;
+        },
         })
     ],
     session:{
